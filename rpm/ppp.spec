@@ -68,4 +68,4 @@ rm -rf %{buildroot}
 
 %files libs
 %defattr(-,root,root,-)
-%{_libdir}/pppd/%{version}/*.so
+%{_libdir}/pppd/2.4.7/*.so
