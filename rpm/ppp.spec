@@ -9,6 +9,7 @@ Source0:    https://download.samba.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:     ppp-destdir.patch
 BuildRequires:  coreutils
 BuildRequires:  sed
+Requires:   libpcap
 
 %description
 PPP point-to-point tunnelling daemon.
