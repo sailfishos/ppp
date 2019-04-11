@@ -7,8 +7,11 @@ License:    GPLv2+
 URL:        https://ppp.samba.org/
 Source0:    https://download.samba.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:     ppp-destdir.patch
+Patch1:     use-openssl.patch
+Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
+BuildRequires:  openssl-devel
 
 %description
 PPP point-to-point tunnelling daemon.
@@ -36,6 +39,7 @@ PPP libraries.
 %prep
 %setup -q -n %{name}-%{version}/%{name}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure --prefix=/usr
