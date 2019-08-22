@@ -3,7 +3,7 @@ Summary:    Point-to-Point
 Version:    2.4.7
 Release:    1
 Group:      Applications/Internet
-License:    GPLv2+
+License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
 URL:        https://ppp.samba.org/
 Source0:    https://download.samba.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:     ppp-destdir.patch
@@ -54,11 +54,11 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root,-)
-/usr/sbin/chat
-/usr/sbin/pppd
-/usr/sbin/pppdump
-/usr/sbin/pppoe-discovery
-/usr/sbin/pppstats
+%{_sbindir}/chat
+%{_sbindir}/pppd
+%{_sbindir}/pppdump
+%{_sbindir}/pppoe-discovery
+%{_sbindir}/pppstats
 %exclude %{_mandir}/man8/chat.8.gz
 %exclude %{_mandir}/man8/pppd.8.gz
 %exclude %{_mandir}/man8/pppdump.8.gz
@@ -68,8 +68,8 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root,-)
-%{_includedir}/pppd/*
+%{_includedir}/pppd
 
 %files libs
 %defattr(-,root,root,-)
-%{_libdir}/pppd/2.4.7/*.so
+%{_libdir}/pppd
