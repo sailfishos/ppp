@@ -2,12 +2,12 @@ Name:       ppp
 Summary:    Point-to-Point
 Version:    2.4.7
 Release:    1
-Group:      Applications/Internet
 License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
 URL:        https://ppp.samba.org/
 Source0:    https://download.samba.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:     ppp-destdir.patch
 Patch1:     use-openssl.patch
+Patch2:     libdir.patch
 Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
@@ -37,12 +37,10 @@ PPP libraries.
 
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
-%patch0 -p1
-%patch1 -p1
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
-%configure --prefix=/usr
+%configure --prefix=%{_prefix}
 make %{?jobs:-j%jobs}
 
 %install
