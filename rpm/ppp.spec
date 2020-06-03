@@ -1,13 +1,13 @@
 Name:       ppp
 Summary:    Point-to-Point
-Version:    2.4.7
+Version:    2.4.8
 Release:    1
 Group:      Applications/Internet
 License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
 URL:        https://ppp.samba.org/
 Source0:    https://download.samba.org/pub/%{name}/%{name}-%{version}.tar.gz
 Patch0:     ppp-destdir.patch
-Patch1:     use-openssl.patch
+Patch1:     CVE-2015-3310.patch
 Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
