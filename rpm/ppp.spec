@@ -5,7 +5,8 @@ Release:    1
 License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
 URL:        https://ppp.samba.org/
 Source0:    %{name}-%{version}.tar.gz
-Patch0:     ppp-destdir.patch
+Patch0:     ppp-2.4.8-build-sys-don-t-hardcode-LIBDIR-but-set-it-according.patch
+Patch1:     ppp-build-sys-use-prefix-usr-instead-of-usr-local.patch
 Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
@@ -41,7 +42,7 @@ make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-%make_install
+make %{?_smp_mflags} INSTROOT=%{buildroot} install
 
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
