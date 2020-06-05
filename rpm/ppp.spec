@@ -2,11 +2,11 @@ Name:       ppp
 Summary:    Point-to-Point
 Version:    2.4.8
 Release:    1
-Group:      Applications/Internet
 License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
 URL:        https://ppp.samba.org/
-Source0:    https://download.samba.org/pub/%{name}/%{name}-%{version}.tar.gz
-Patch0:     ppp-destdir.patch
+Source0:    %{name}-%{version}.tar.gz
+Patch0:     ppp-2.4.8-build-sys-don-t-hardcode-LIBDIR-but-set-it-according.patch
+Patch1:     ppp-build-sys-use-prefix-usr-instead-of-usr-local.patch
 Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
@@ -18,7 +18,6 @@ PPP point-to-point tunnelling daemon.
 
 %package devel
 Summary:    PPP devel files
-Group:      Development/Libraries
 Requires:   ppp-libs = %{version}-%{release}
 
 %description devel
@@ -26,7 +25,6 @@ PPP devel files.
 
 %package libs
 Summary:    PPP libraries
-Group:      System/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -36,16 +34,15 @@ PPP libraries.
 
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
-%patch0 -p1
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
 %configure --prefix=/usr
-make %{?jobs:-j%jobs}
+make %{?_smp_mflags}
 
 %install
 rm -rf %{buildroot}
-%make_install
+make %{?_smp_mflags} INSTROOT=%{buildroot} install
 
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
