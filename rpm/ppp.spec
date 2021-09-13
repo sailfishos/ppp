@@ -1,16 +1,17 @@
 Name:       ppp
 Summary:    Point-to-Point
-Version:    2.4.8
+Version:    2.4.9
 Release:    1
 License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
 URL:        https://ppp.samba.org/
 Source0:    %{name}-%{version}.tar.gz
-Patch0:     ppp-2.4.8-build-sys-don-t-hardcode-LIBDIR-but-set-it-according.patch
-Patch1:     ppp-build-sys-use-prefix-usr-instead-of-usr-local.patch
+Patch0:     0001-ppp-2.4.9-build-sys-don-t-hardcode-LIBDIR-but-set-it-according.patch
+Patch1:     0002-Revert-pppd-Fix-setting-IPv6-peer-address-212.patch
 Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
 BuildRequires:  openssl-devel
+BuildRequires:  libpcap-devel
 
 %description
 PPP point-to-point tunnelling daemon.
