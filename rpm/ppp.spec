@@ -10,8 +10,9 @@ Patch1:     0002-Revert-pppd-Fix-setting-IPv6-peer-address-212.patch
 Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
-BuildRequires:  openssl-devel
-BuildRequires:  libpcap-devel
+BuildRequires:  pkgconfig(openssl)
+BuildRequires:  pkgconfig(libpcap)
+BuildRequires:  pkgconfig(libcrypt)
 
 %description
 PPP point-to-point tunnelling daemon.
