@@ -1,12 +1,10 @@
 Name:       ppp
 Summary:    Point-to-Point
-Version:    2.4.9
+Version:    2.5.2
 Release:    1
 License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
-URL:        https://ppp.samba.org/
+URL:        https://github.com/sailfishos/ppp
 Source0:    %{name}-%{version}.tar.gz
-Patch0:     0001-ppp-2.4.9-build-sys-don-t-hardcode-LIBDIR-but-set-it-according.patch
-Patch1:     0002-Revert-pppd-Fix-setting-IPv6-peer-address-212.patch
 Requires:   openssl-libs
 BuildRequires:  coreutils
 BuildRequires:  sed
@@ -39,18 +37,18 @@ PPP libraries.
 %autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
+autoreconf -fi
 %configure --prefix=/usr
-make %{?_smp_mflags}
+%make_build
 
 %install
 rm -rf %{buildroot}
-make %{?_smp_mflags} INSTROOT=%{buildroot} install
+%make_install
 
 %post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
 %files
-%defattr(-,root,root,-)
 %{_sbindir}/chat
 %{_sbindir}/pppd
 %{_sbindir}/pppdump
@@ -62,11 +60,17 @@ make %{?_smp_mflags} INSTROOT=%{buildroot} install
 %exclude %{_mandir}/man8/pppstats.8.gz
 %exclude %{_mandir}/man8/pppd-radius.8.gz
 %exclude %{_mandir}/man8/pppd-radattr.8.gz
+%exclude %{_mandir}/man8/pppoe-discovery.8.gz
+%exclude %{_sysconfdir}/ppp/chap-secrets.example
+%exclude %{_sysconfdir}/ppp/eaptls-client.example
+%exclude %{_sysconfdir}/ppp/eaptls-server.example
+%exclude %{_sysconfdir}/ppp/openssl.cnf.example
+%exclude %{_sysconfdir}/ppp/options.example
+%exclude %{_sysconfdir}/ppp/pap-secrets.example
 
 %files devel
-%defattr(-,root,root,-)
 %{_includedir}/pppd
+%{_libdir}/pkgconfig/pppd.pc
 
 %files libs
-%defattr(-,root,root,-)
 %{_libdir}/pppd
