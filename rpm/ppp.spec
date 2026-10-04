@@ -1,6 +1,6 @@
 Name:       ppp
 Summary:    Point-to-Point
-Version:    2.5.2
+Version:    2.5.4
 Release:    1
 License:    BSD and GPLv2+ and LGPLv2+ and Public Domain
 URL:        https://github.com/sailfishos/ppp
